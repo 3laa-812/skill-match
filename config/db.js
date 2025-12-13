@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 const config = require("config");
+require("dotenv").config();
 
-const db = config.get("mongoURI");
+// استخدام MONGODB_URI من .env أو من config/default.json
+const db = process.env.MONGODB_URI || config.get("mongoURI");
 
 const connectDB = async () => {
   try {
     await mongoose.connect(db);
-    console.log("MongoDB Connected...");
+    console.log("✅ MongoDB Connected Successfully!");
+    console.log(`📍 Database: ${mongoose.connection.name}`);
   } catch (err) {
+    console.error("❌ MongoDB Connection Error:");
     console.error(err.message);
     process.exit(1);
   }

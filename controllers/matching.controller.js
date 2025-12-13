@@ -6,8 +6,8 @@ exports.getMatchingJobs = async (req, res) => {
     // 1. user id من التوكن
     const userId = req.user;
 
-    // 2. هات المستخدم
-    const user = await User.findById(userId);
+    // 2. هات المستخدم ومهاراته (populate عشان تجيب الأسماء)
+    const user = await User.findById(userId).populate("skills");
 
     if (!user || !user.skills || user.skills.length === 0) {
       return res.json({
@@ -17,10 +17,15 @@ exports.getMatchingJobs = async (req, res) => {
       });
     }
 
-    // 3. هات الوظايف اللي فيها أي skill مشترك
+    // استخراج أسماء المهارات من مصفوفة الـ objects
+    const userSkillNames = user.skills.map(skill => skill.name);
+
+    console.log("User Skills:", userSkillNames); // للتأكد في الكونسول
+
+    // 3. هات الوظايف اللي فيها أي skill مشترك (مقارنة Strings بـ Strings)
     const jobs = await Job.find({
-      skills: { $in: user.skills }
-    }).populate("skills");
+      skills: { $in: userSkillNames }
+    });
 
     // 4. رجّع النتيجة
     res.json({

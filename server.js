@@ -1,12 +1,14 @@
+require("dotenv").config();
 const app = require("./app");
 const connectDB = require("./config/db");
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
 connectDB();
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🌐 API URL: http://localhost:${PORT}`);
 });

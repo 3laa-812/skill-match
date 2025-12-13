@@ -11,7 +11,30 @@ app.use("/api/skills", require("./routes/api/skills.routes"));
 app.use("/api/matching", require("./routes/api/matching.routes"));
 
 app.get("/", (req, res) => {
-  res.send("Skill-Match API is running...");
+  res.send("Skill-Match API is running... <a href='/api-docs'>View Documentation</a>");
 });
+
+// Swagger Documentation
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpecs = require("./config/swagger");
+
+// Serve Swagger Spec JSON
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpecs);
+});
+
+// Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
+// ReDoc Documentation
+const redoc = require("redoc-express");
+app.get(
+  "/redoc",
+  redoc({
+    title: "Skill-Match API Documentation",
+    specUrl: "/api-docs.json",
+  })
+);
 
 module.exports = app;
