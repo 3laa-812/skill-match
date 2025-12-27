@@ -1,0 +1,172 @@
+I want you to generate a complete Next.js 14 (App Router) frontend project using TypeScript + TailwindCSS + ShadCN UI.
+
+🎨 Theme Requirements (based on color theory)
+
+Use a soft, eye-comforting palette:
+
+Primary: #6C63FF (Soft Indigo for trust + creativity)
+
+Secondary: #4ECDC4 (Calm aqua for balance)
+
+Background: #F7F9FC (Soft off-white for readability)
+
+Text Color: #1A1A1A
+The navbar must be modern, minimal, responsive, blurred (glass effect), and use these colors consistently.
+
+📁 Folder Structure — Match EXACTLY this hierarchy
+
+Inside /src/app:
+
+src/
+ ├── app/
+ │   ├── (auth)/
+ │   │    ├── login/page.tsx
+ │   │    ├── register/page.tsx
+ │   │
+ │   ├── dashboard/
+ │   │    └── page.tsx
+ │   │
+ │   ├── jobs/
+ │   │    ├── page.tsx
+ │   │    ├── [id]/page.tsx
+ │   │
+ │   ├── matching/
+ │   │    └── page.tsx
+ │   │
+ │   ├── skills/
+ │   │    └── page.tsx
+ │
+ │   ├── layout.tsx
+ │   ├── globals.css
+ │   └── page.tsx
+ │
+ ├── components/
+ │   ├── ui/
+ │   ├── layout/
+ │   ├── features/
+ │   └── navbar.tsx
+ │
+ ├── config/
+ ├── features/
+ ├── hooks/
+ ├── lib/
+ ├── services/
+ ├── state/
+ ├── styles/
+ ├── types/
+ └── utils/
+
+
+Match the hierarchy exactly — this structure is important.
+
+🌐 API integration
+
+Prepare service files under /src/services:
+
+auth.service.ts
+
+jobs.service.ts
+
+skills.service.ts
+
+matching.service.ts
+
+user.service.ts
+
+All services should call these backend endpoints:
+
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/users/profile
+PUT /api/users/skills
+POST /api/jobs
+GET /api/jobs
+GET /api/jobs/:id
+GET /api/matching/jobs
+GET /api/skills
+POST /api/skills
+
+
+Use a single Axios instance with:
+
+baseURL = process.env.NEXT_PUBLIC_API_URL
+Authorization: Bearer token
+
+
+Add token handling and automatic redirect to login if unauthorized.
+
+🧩 Pages that must be implemented
+Home Page (/)
+
+Hero section with gradient background using the chosen palette
+
+CTA buttons: Login, Register
+
+Minimal icons + modern typography
+
+Auth Pages
+
+/login
+
+/register
+Clean UI, card-centered forms, input validation.
+
+Dashboard Page
+
+Show:
+
+User name
+
+Skill count
+
+Job matches count
+
+Quick actions (Add Skills, View Jobs)
+
+Jobs Pages
+
+/jobs → list of all jobs
+
+/jobs/[id] → job details
+
+Matching Page
+
+Display job recommendations with tags based on matched skills.
+
+Skills Page
+
+Form to add/update user skills + list existing skills.
+
+🧱 Components that must be generated
+
+Under /src/components:
+
+Navbar with sticky glassmorphism design
+
+Button, Input, Card (using ShadCN UI style)
+
+JobCard, SkillTag, MatchCard
+
+Layout wrappers
+
+📌 Technical requirements
+
+Next.js 14 App Router
+
+TypeScript
+
+TailwindCSS + custom theme colors
+
+ShadCN UI installed + configured
+
+Dark mode support
+
+Responsive design (mobile-first)
+
+Smooth animations using Framer Motion
+
+Clean architecture: hooks, services, utils, types
+
+🎯 Final Deliverable
+
+Generate the full folder structure + all pages + components + styles + service files with clean, readable code that compiles instantly in Replit.
